@@ -10,7 +10,7 @@ class Admin extends Component {
         return(
             <div>
                 <form>
-                    <input type="text" placeholder="Name" />
+                    <input type="text" placeholder="Name" required />
                     <input type="date" name="completed" />
                     <select>
                         <option defaultValue="select" disabled>Select a Tag</option>
@@ -21,9 +21,9 @@ class Admin extends Component {
                         <option value="sql">SQL</option>
                         <option value="html">HTML</option>
                     </select>
-                    <input type="url" placeholder="GitHub URL" />
+                    <input type="url" placeholder="GitHub URL" required />
                     <input type="url" placeholder="Website URL (optional)" />
-                    <textarea type="text" rows="6" cols="36" placeholder="Description"></textarea>
+                    <textarea type="text" rows="6" cols="36" placeholder="Description" required />
 
                 </form>
                 <table>
