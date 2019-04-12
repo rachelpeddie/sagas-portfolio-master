@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { HashRouter as Router, Route } from 'react-router-dom';
+import Admin from '../Admin/Admin';
 import './App.css';
 
 class App extends Component {
@@ -6,7 +8,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <p>Empty Page</p>
+        <p>Rachel Peddie</p>
+        <Router>
+          <Route path='/admin' component={Admin} />
+        </Router>
       </div>
     );
   }
