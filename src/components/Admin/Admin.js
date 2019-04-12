@@ -34,12 +34,12 @@ class Admin extends Component {
                         </tr>
                         </thead>
                     <tbody>
-                    {/* {this.props.reduxState.map( project => 
+                    {this.props.reduxState.projects.map( project => 
                         <tr key={project.id}>
                             <td>{project.name}</td>
                             <td><button>Delete Project</button></td>
                         </tr>
-                    )} */}
+                    )}
                     </tbody>
                 </table>
             </div>
