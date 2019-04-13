@@ -17,7 +17,6 @@ function* getProjectsSaga ( action ) {
         const getProjectsResponse = yield axios.get( '/projects' )
         console.log(`got projects from saga, woot!`, getProjectsResponse);
         yield put({ type: 'SET_PROJECTS', payload: getProjectsResponse.data })
-        console.log(`sent 'SET_PROJECTS' action`); 
     }
     catch ( error ) {
         console.log(`error in getProjectsSaga`, error);
@@ -29,7 +28,6 @@ function* getTagsSaga ( action ) {
         const getTagsResponse = yield axios.get( '/projects/tags' )
         console.log(`got tags from saga, woot!`, getTagsResponse);
         yield put({ type: 'SET_TAGS', payload: getTagsResponse.data})
-        console.log(`sent 'SET_TAGS' action`);
     }
     catch (error) {
         console.log(`error in getTagsSaga`, error);
@@ -41,19 +39,32 @@ function* addProjectSaga ( action ) {
         const addProjectResponse = yield axios.post( '/projects', action.payload );
         console.log(`posted tags from saga, woot!`, addProjectResponse);
         yield put({ type: 'GET_PROJECTS' });
-        console.log(`send 'GET_PROJECTS' action`);
     }
     catch (error) {
-        console.log(`error in addProjectSaga`);
+        console.log(`error in addProjectSaga`, error);
         
     }
+}
+
+function* deleteProjectSaga ( action ) {
+    try{
+        const deleteProjectResponse = yield axios.delete(`/projects/:${action.payload}`)
+        console.log( `deleted project from saga, woot!`, deleteProjectResponse );
+        yield put({ type: 'GET_PROJECTS' });
+    }
+    catch( error ) {
+        console.log(`error in deleteProjectSaga`, error);
+        
+    }
+
 }
 
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery( 'GET_PROJECTS', getProjectsSaga );
     yield takeEvery( 'GET_TAGS', getTagsSaga );
-    yield takeEvery( 'ADD_PROJECT', addProjectSaga)
+    yield takeEvery( 'ADD_PROJECT', addProjectSaga );
+    yield takeEvery( 'DELETE_PROJECT', deleteProjectSaga );
 }
 
 // Create sagaMiddleware

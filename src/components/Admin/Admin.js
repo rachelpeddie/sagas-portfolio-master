@@ -74,7 +74,7 @@ class Admin extends Component {
                     {this.props.reduxState.projects.map( (project, i) => 
                         <tr key={i}>
                             <td>{project.name}</td>
-                            <td><button onClick={this.handleDelete}>Delete Project</button></td>
+                            <td><button onClick={this.handleDelete} value={project.id}>Delete Project</button></td>
                         </tr>
                     )}
                     </tbody>
