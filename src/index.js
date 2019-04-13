@@ -14,19 +14,32 @@ import { takeEvery, put } from 'redux-saga/effects';
 
 function* getProjectsSaga ( action ) {
     try {
-        const getResponse = yield axios.get( '/projects' )
-        console.log(`got data from saga, woot!`, getResponse);
-        yield put({ type: 'SET_PROJECTS', payload: getResponse.data })
-        console.log(`send 'SET_PROJECTS' action`); 
+        const getProjectsResponse = yield axios.get( '/projects' )
+        console.log(`got projects from saga, woot!`, getProjectsResponse);
+        yield put({ type: 'SET_PROJECTS', payload: getProjectsResponse.data })
+        console.log(`sent 'SET_PROJECTS' action`); 
     }
     catch ( error ) {
         console.log(`error in getProjectsSaga`, error);
     }
 }
 
+function* getTagsSaga ( action ) {
+    try {
+        const getTagsResponse = yield axios.get( '/projects/tags' )
+        console.log(`got tags from saga, woot!`, getTagsResponse);
+        yield put({ type: 'SET_TAGS', payload: getTagsResponse.data})
+        console.log(`sent 'SET_TAGS' action`);
+    }
+    catch (error) {
+        console.log(`error in getTagsSaga`, error);
+    }
+}
+
 // Create the rootSaga generator function
 function* rootSaga() {
-    yield takeEvery( 'GET_PROJECTS', getProjectsSaga )
+    yield takeEvery( 'GET_PROJECTS', getProjectsSaga );
+    yield takeEvery('GET_TAGS', getTagsSaga);
 }
 
 // Create sagaMiddleware
