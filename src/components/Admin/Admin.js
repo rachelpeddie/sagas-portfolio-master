@@ -34,6 +34,10 @@ class Admin extends Component {
         this.props.dispatch({ type: 'ADD_PROJECT', payload: this.state.newProject })
     }
 
+    handleDelete = (event) => {
+        this.props.dispatch({ type: 'DELETE_PROJECT', payload: event.target.value })
+    }
+
     render(){
         return(
             <div>
@@ -70,7 +74,7 @@ class Admin extends Component {
                     {this.props.reduxState.projects.map( (project, i) => 
                         <tr key={i}>
                             <td>{project.name}</td>
-                            <td><button>Delete Project</button></td>
+                            <td><button onClick={this.handleDelete}>Delete Project</button></td>
                         </tr>
                     )}
                     </tbody>
