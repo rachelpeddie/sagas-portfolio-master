@@ -48,7 +48,7 @@ function* addProjectSaga ( action ) {
 
 function* deleteProjectSaga ( action ) {
     try{
-        const deleteProjectResponse = yield axios.delete(`/projects/:${action.payload}`)
+        const deleteProjectResponse = yield axios.delete(`/projects/${action.payload}`)
         console.log( `deleted project from saga, woot!`, deleteProjectResponse );
         yield put({ type: 'GET_PROJECTS' });
     }

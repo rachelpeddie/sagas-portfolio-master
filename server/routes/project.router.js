@@ -45,5 +45,20 @@ router.post('/', (req, res) => {
     })
 })
 
+router.delete('/:id', (req, res) => {
+    let id = req.params.id
+    console.log(`in delete request`, id);
+    const sqlText = `DELETE FROM "projects" WHERE "id"=$1;`
+    pool.query(sqlText, [id])
+    .then( response => {
+        console.log(`woot, successfully deleted project wth id ${id}`);
+        res.sendStatus(200);
+    }).catch( error => {
+        console.log(`error deleting project from db`, error);
+        res.sendStatus(500);
+    })
+    
+})
+
 
 module.exports = router;
