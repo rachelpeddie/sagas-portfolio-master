@@ -43,8 +43,8 @@ class Admin extends Component {
                     <input type="date" name="completed" onChange={this.handleChangeFor('description')} />
                     <select onChange={this.handleChangeFor('tag_id')}>
                         <option defaultValue="select" selected disabled>Select a Tag</option>
-                        {this.props.reduxState.tags.map( tag => 
-                            <option value={tag.id}>{tag.name}</option>
+                        {this.props.reduxState.tags.map( (tag, i) => 
+                            <option value={tag.id} key={i}>{tag.name}</option>
                             )}
                         {/* <option value="1">React</option>
                         <option value="5">Redux</option>
@@ -67,8 +67,8 @@ class Admin extends Component {
                         </tr>
                         </thead>
                     <tbody>
-                    {this.props.reduxState.projects.map( project => 
-                        <tr key={project.id}>
+                    {this.props.reduxState.projects.map( (project, i) => 
+                        <tr key={i}>
                             <td>{project.name}</td>
                             <td><button>Delete Project</button></td>
                         </tr>
