@@ -3,6 +3,7 @@ const pool = require('../modules/pool');
 
 const router = express.Router();
 
+// gets all projects from db -- NEED TO ADJUST TO JOIN "tags" TO DISPLAY TAG NAME ON PROJECT PAGE
 router.get('/', (req, res) => {
     console.log(`in project get request`);
     const sqlText =  `SELECT * FROM "projects";`
@@ -17,6 +18,7 @@ router.get('/', (req, res) => {
     
 })
 
+// gets all tags from db
 router.get('/tags', (req, res) => {
     console.log(`in tags get request`);
     const sqlText = `SELECT * FROM "tags";`
@@ -31,6 +33,7 @@ router.get('/tags', (req, res) => {
 
 })
 
+// posts new project into database
 router.post('/', (req, res) => {
     let project = req.body;
     console.log(`in post request`, project);
@@ -45,6 +48,7 @@ router.post('/', (req, res) => {
     })
 })
 
+// deletes project from database by id
 router.delete('/:id', (req, res) => {
     let id = req.params.id
     console.log(`in delete request`, id);

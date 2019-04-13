@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 class Projects extends Component {
 
+    // dispatch on component mount to trigger getProjectsSaga
     componentDidMount = () => {
         this.props.dispatch({ type: 'GET_PROJECTS' })
     }
@@ -10,6 +11,7 @@ class Projects extends Component {
     render(){
         return(
             <div>
+                {/* maps through projects reducer and displays each project on dom*/}
                 {this.props.reduxState.projects.map(project =>
                     <section key={project.id}>
                         <h3>{project.name}</h3>

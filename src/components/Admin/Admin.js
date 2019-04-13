@@ -15,11 +15,13 @@ class Admin extends Component {
         }
     }
 
+    // dispatch on component mount to trigger getProjectsSaga and getTagsSaga
     componentDidMount = () => {
         this.props.dispatch({ type: 'GET_PROJECTS' });
         this.props.dispatch({ type: 'GET_TAGS' });
     }
 
+    // sets component state from input values on form
     handleChangeFor = propertyName => event => {
         this.setState({
             newProject: {
@@ -29,11 +31,13 @@ class Admin extends Component {
         })
     }
 
+    // dispatches new project data to addProjectSaga on click
     handleSubmit = ( event ) => {
         event.preventDefault();
         this.props.dispatch({ type: 'ADD_PROJECT', payload: this.state.newProject })
     }
 
+    // dispatches project id to deleteProjectSaga on click
     handleDelete = (event) => {
         this.props.dispatch({ type: 'DELETE_PROJECT', payload: event.target.value })
     }
@@ -41,21 +45,15 @@ class Admin extends Component {
     render(){
         return(
             <div>
-                <pre>{JSON.stringify(this.state)}</pre>
                 <form>
                     <input type="text" placeholder="Name" required onChange={this.handleChangeFor('name')} />
                     <input type="date" name="completed" onChange={this.handleChangeFor('description')} />
                     <select onChange={this.handleChangeFor('tag_id')}>
                         <option defaultValue="select" selected disabled>Select a Tag</option>
+                        {/* maps through tags reducer to display all tag options for dropdown */}
                         {this.props.reduxState.tags.map( (tag, i) => 
                             <option value={tag.id} key={i}>{tag.name}</option>
                             )}
-                        {/* <option value="1">React</option>
-                        <option value="5">Redux</option>
-                        <option value="2">jQuery</option>
-                        <option value="3">Node</option>
-                        <option value="4">SQL</option>
-                        <option value="6">HTML</option> */}
                     </select>
                     <input type="url" placeholder="Image URL" required onChange={this.handleChangeFor('thumbnail')} />
                     <input type="url" placeholder="GitHub URL" required onChange={this.handleChangeFor('github')}/>
@@ -71,6 +69,7 @@ class Admin extends Component {
                         </tr>
                         </thead>
                     <tbody>
+                        {/* maps through projects reducer to display all project names in table with delete button */}
                     {this.props.reduxState.projects.map( (project, i) => 
                         <tr key={i}>
                             <td>{project.name}</td>

@@ -12,6 +12,7 @@ import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import { takeEvery, put } from 'redux-saga/effects';
 
+// gets all projects from server
 function* getProjectsSaga ( action ) {
     try {
         const getProjectsResponse = yield axios.get( '/projects' )
@@ -23,6 +24,7 @@ function* getProjectsSaga ( action ) {
     }
 }
 
+// gets all tags from server
 function* getTagsSaga ( action ) {
     try {
         const getTagsResponse = yield axios.get( '/projects/tags' )
@@ -34,6 +36,7 @@ function* getTagsSaga ( action ) {
     }
 }
 
+// sends new project data to server
 function* addProjectSaga ( action ) {
     try {
         const addProjectResponse = yield axios.post( '/projects', action.payload );
@@ -46,6 +49,7 @@ function* addProjectSaga ( action ) {
     }
 }
 
+// send project id for delete to server
 function* deleteProjectSaga ( action ) {
     try{
         const deleteProjectResponse = yield axios.delete(`/projects/${action.payload}`)
