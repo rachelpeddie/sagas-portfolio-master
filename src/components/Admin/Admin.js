@@ -29,10 +29,10 @@ class Admin extends Component {
         })
     }
 
-    // handleSubmit = ( event ) => {
-    //     event.preventDefault();
-    //     this.props.dispatch()
-    // }
+    handleSubmit = ( event ) => {
+        event.preventDefault();
+        this.props.dispatch({ type: 'ADD_PROJECT', payload: this.state.newProject })
+    }
 
     render(){
         return(
