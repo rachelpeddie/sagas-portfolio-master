@@ -42,9 +42,15 @@ class Admin extends Component {
         this.props.dispatch({ type: 'DELETE_PROJECT', payload: event.target.value })
     }
 
+    // function to return to projects page on click
+    pageChange = () => {
+        this.props.history.push('/');
+    }
+
     render(){
         return(
             <div>
+                <button onClick={this.pageChange}>Project Page</button>
                 <form>
                     <input type="text" placeholder="Name" required onChange={this.handleChangeFor('name')} />
                     <input type="date" name="completed" onChange={this.handleChangeFor('description')} />
