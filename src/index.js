@@ -36,10 +36,24 @@ function* getTagsSaga ( action ) {
     }
 }
 
+function* addProjectSaga ( action ) {
+    try {
+        const addProjectResponse = yield axios.post( '/projects', action.payload );
+        console.log(`posted tags from saga, woot!`, addProjectResponse);
+        yield put({ type: 'GET_PROJECTS' });
+        console.log(`send 'GET_PROJECTS' action`);
+    }
+    catch (error) {
+        console.log(`error in addProjectSaga`);
+        
+    }
+}
+
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery( 'GET_PROJECTS', getProjectsSaga );
-    yield takeEvery('GET_TAGS', getTagsSaga);
+    yield takeEvery( 'GET_TAGS', getTagsSaga );
+    yield takeEvery( 'ADD_PROJECT', addProjectSaga)
 }
 
 // Create sagaMiddleware
