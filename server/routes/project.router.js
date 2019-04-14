@@ -6,7 +6,9 @@ const router = express.Router();
 // gets all projects from db -- NEED TO ADJUST TO JOIN "tags" TO DISPLAY TAG NAME ON PROJECT PAGE
 router.get('/', (req, res) => {
     console.log(`in project get request`);
-    const sqlText =  `SELECT * FROM "projects";`
+    const sqlText =  `SELECT "projects"."id", "projects"."name", "projects"."description", "projects"."thumbnail", "projects"."website", "projects"."github", "projects"."date_completed", "projects"."tag_id", "tags"."name" AS "tag_name"
+                      FROM "projects"
+                      JOIN "tags" ON "projects"."tag_id" = "tags"."id";`
     pool.query (sqlText)
     .then( result => {
         console.log(`woot, project result sent from db`, result);

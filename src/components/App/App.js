@@ -9,9 +9,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <p>Rachel Peddie</p>
+        <h1>Rachel Peddie</h1>
         <Router>
-          <Route path='/admin' component={Admin} />
+          <Route exact path='/admin' component={Admin} />
           <Route exact path='/' component={Projects} />
         </Router>
       </div>
