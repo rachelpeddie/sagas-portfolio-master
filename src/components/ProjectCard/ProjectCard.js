@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
+// material UI styles
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -11,7 +12,8 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = {
     card: {
-        maxWidth: 345,
+        minWidth: 200,
+        minHeight: 300,
     },
     media: {
         height: 140,
@@ -21,55 +23,39 @@ const styles = {
 function MediaCard(props) {
     const { classes } = props;
     return (
-        <div>
-        {
-            this.props.reduxState.projects.map(project =>
-        <Card className={classes.card} key={project.id}>
+        <Card className={classes.card}>
             <CardActionArea>
                 <CardMedia
                     className={classes.media}
-                    image={project.thumbnail}
-                    title={project.name}
+                    image={props.project.thumbnail}
+                    title={props.project.name}
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
-                        Lizard
-          </Typography>
+                        {props.project.name}
+                    </Typography>
                     <Typography component="p">
-                        Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                        across all continents except Antarctica
-          </Typography>
+                        <i>{props.project.tag_name}</i>
+                    </Typography>
+                    <Typography component="p">
+                        {props.project.description}
+                    </Typography>
                 </CardContent>
             </CardActionArea>
             <CardActions>
                 <Button size="small" color="primary">
-                    Share
-        </Button>
+                    <a href={props.project.github} target="_blank">GitHub</a>
+                </Button>
                 <Button size="small" color="primary">
-                    Learn More
-        </Button>
+                    <a href={props.project.website} target="_blank">Website</a>
+                </Button>
             </CardActions>
         </Card>
-            </div>
     );
 }
-//         <section key={project.id}>
-//             <h3>{project.name}</h3>
-//             <img src= alt={project.name}></img>
-//             <a href={project.github}>GitHub</a>
-//             <a href={project.website}>Website</a>
-//             <p>{project.tag_name}</p>
-//             <p>{project.description}</p>
-//         </section >
-//     )
-// }
 
 MediaCard.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-const mapReduxStateToProps = reduxState => ({
-    reduxState,
-})
-
-export default connect(mapReduxStateToProps)(withStyles(styles)(MediaCard));;
+export default (withStyles(styles)(MediaCard));;
