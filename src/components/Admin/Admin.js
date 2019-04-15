@@ -78,7 +78,7 @@ class Admin extends Component {
         return(
             
             <div>
-                <pre>{JSON.stringify(this.state)}</pre>
+                {/* <pre>{JSON.stringify(this.state)}</pre> */}
                 <button onClick={this.pageChange}>Project Page</button>
                 <form className={classes.container} noValidate>
                     {/* <input type="text" placeholder="Name" required onChange={this.handleChangeFor('name')} /> */}
