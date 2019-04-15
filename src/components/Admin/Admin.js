@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import MenuItem from '@material-ui/core/MenuItem';
 
 const styles = theme => ({
     container: {
@@ -14,6 +15,14 @@ const styles = theme => ({
     textField: {
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
+        width: 200,
+    },
+    description: {
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
+        width: 400,
+    },
+    menu: {
         width: 200,
     },
 });
@@ -28,7 +37,7 @@ class Admin extends Component {
             github: '',
             website: '',
             date: '',
-            tag_id: ''
+            tag_id: '',
         }
     }
 
@@ -72,7 +81,17 @@ class Admin extends Component {
                 <pre>{JSON.stringify(this.state)}</pre>
                 <button onClick={this.pageChange}>Project Page</button>
                 <form className={classes.container} noValidate>
-                    <input type="text" placeholder="Name" required onChange={this.handleChangeFor('name')} />
+                    {/* <input type="text" placeholder="Name" required onChange={this.handleChangeFor('name')} /> */}
+                    <TextField
+                        id="standard-with-placeholder"
+                        label="Project Name"
+                        type="text"
+                        placeholder="Name"
+                        className={classes.textField}
+                        margin="normal"
+                        required
+                        onChange={this.handleChangeFor('name')}
+                    />
                     <TextField
                         id="date"
                         label="Date Completed"
@@ -83,18 +102,83 @@ class Admin extends Component {
                         InputLabelProps={{
                             shrink: true,
                         }}
+                        margin="normal"
                     />
-                    <select onChange={this.handleChangeFor('tag_id')}>
+                    {/* <select onChange={this.handleChangeFor('tag_id')}>
                         <option defaultValue="select" selected disabled>Select a Tag</option>
                         {/* maps through tags reducer to display all tag options for dropdown */}
-                        {this.props.reduxState.tags.map( (tag, i) => 
-                            <option value={tag.id} key={i}>{tag.name}</option>
+                        {/* {this.props.reduxState.tags.map( (tag, i) => 
+                            <MenuItem value={tag.id} key={i}>{tag.name}</MenuItem>
                             )}
-                    </select>
-                    <input type="url" placeholder="Image URL" required onChange={this.handleChangeFor('thumbnail')} />
-                    <input type="url" placeholder="GitHub URL" required onChange={this.handleChangeFor('github')}/>
-                    <input type="url" placeholder="Website URL" required onChange={this.handleChangeFor('website')} />
-                    <textarea type="text" rows="6" cols="36" placeholder="Description" required onChange={this.handleChangeFor('description')}/>
+                    </select> */}
+
+                    <TextField
+                        id="standard-select"
+                        select
+                        label="Select"
+                        className={classes.textField}
+                        value={this.state.tag_id}
+                        onChange={this.handleChangeFor('tag_id')}
+                        SelectProps={{
+                            MenuProps: {
+                                className: classes.menu,
+                            },
+                        }}
+                        helperText="Please select your project tag"
+                        margin="normal"
+                    >
+                        {this.props.reduxState.tags.map((tag, i) =>
+                            <MenuItem value={tag.id} key={i}>{tag.name}</MenuItem>
+                        )}
+                    </TextField>
+
+                    {/* <input type="url" placeholder="Image URL" required onChange={this.handleChangeFor('thumbnail')} /> */}
+                    <TextField
+                        id="standard-with-placeholder"
+                        label="Project Thumbnail"
+                        type="url"
+                        placeholder="Image Url"
+                        className={classes.textField}
+                        margin="normal"
+                        required
+                        onChange={this.handleChangeFor('thumbnail')}
+                    />
+                    {/* <input type="url" placeholder="GitHub URL" required onChange={this.handleChangeFor('github')}/> */}
+                    <TextField
+                        id="standard-with-placeholder"
+                        label="Github"
+                        type="url"
+                        placeholder="GitHub URL"
+                        className={classes.textField}
+                        margin="normal"
+                        required
+                        onChange={this.handleChangeFor('github')}
+                    />
+                    {/* <input type="url" placeholder="Website URL" required onChange={this.handleChangeFor('website')} /> */}
+                    <TextField
+                        id="standard-with-placeholder"
+                        label="Project Website"
+                        type="url"
+                        placeholder="Website URL"
+                        className={classes.textField}
+                        margin="normal"
+                        required
+                        onChange={this.handleChangeFor('website')}
+                    />
+                    {/* <textarea type="text" rows="6" cols="36" placeholder="Description" required onChange={this.handleChangeFor('description')}/> */}
+
+                    <TextField
+                        id="outlined-multiline-flexible"
+                        label="Description"
+                        multiline
+                        rowsMax="8"
+                        value={this.state.description}
+                        onChange={this.handleChangeFor('description')}
+                        className={classes.description}
+                        margin="normal"
+                        variant="outlined"
+                        required
+                    />
                     <button type="submit" onClick={this.handleSubmit}>Add Project</button>
                 </form>
                 <table>
