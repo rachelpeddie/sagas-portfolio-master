@@ -1,6 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+// material ui styles
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+
+const styles = theme => ({
+    container: {
+        display: 'flex',
+        flexWrap: 'wrap',
+    },
+    textField: {
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
+        width: 200,
+    },
+});
+
 class Admin extends Component {
 
     state = {
@@ -48,12 +65,25 @@ class Admin extends Component {
     }
 
     render(){
+        const { classes } = this.props;
         return(
+            
             <div>
+                <pre>{JSON.stringify(this.state)}</pre>
                 <button onClick={this.pageChange}>Project Page</button>
-                <form>
+                <form className={classes.container} noValidate>
                     <input type="text" placeholder="Name" required onChange={this.handleChangeFor('name')} />
-                    <input type="date" name="completed" onChange={this.handleChangeFor('description')} />
+                    <TextField
+                        id="date"
+                        label="Date Completed"
+                        type="date"
+                        defaultValue="mm/dd/yyyy"
+                        onChange={this.handleChangeFor('date')}
+                        className={classes.textField}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                    />
                     <select onChange={this.handleChangeFor('tag_id')}>
                         <option defaultValue="select" selected disabled>Select a Tag</option>
                         {/* maps through tags reducer to display all tag options for dropdown */}
@@ -93,4 +123,8 @@ const mapReduxStateToProps = reduxState => ({
     reduxState,
 })
 
-export default connect(mapReduxStateToProps)(Admin);
+Admin.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+export default connect(mapReduxStateToProps)(withStyles(styles)(Admin));

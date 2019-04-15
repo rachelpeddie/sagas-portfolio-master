@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 // material UI styles
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -12,8 +12,8 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = {
     card: {
-        minWidth: 200,
-        minHeight: 300,
+        width: '100%',
+        // maxHeight: 295,
     },
     media: {
         height: 140,
