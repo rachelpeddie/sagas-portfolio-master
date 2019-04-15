@@ -96,7 +96,7 @@ class Admin extends Component {
                         id="date"
                         label="Date Completed"
                         type="date"
-                        defaultValue="mm/dd/yyyy"
+                        defaultValue="yyyy-MM-dd"
                         onChange={this.handleChangeFor('date')}
                         className={classes.textField}
                         InputLabelProps={{
@@ -117,7 +117,7 @@ class Admin extends Component {
                         select
                         label="Select"
                         className={classes.textField}
-                        value={this.state.tag_id}
+                        value={this.state.newProject.tag_id}
                         onChange={this.handleChangeFor('tag_id')}
                         SelectProps={{
                             MenuProps: {
